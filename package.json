@@ -1,0 +1,19 @@
+{
+  "name": "vizion-studio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "turbo run dev"
+  },
+  "packageManager": "npm@10.9.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "keywords": [],
+  "author": "Garry",
+  "license": "ISC",
+  "description": "Vizion Studio Project",
+  "devDependencies": {
+    "turbo": "^2.3.0"
+  }
+}

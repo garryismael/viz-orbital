@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = "Vizion Studio Backend"
+authors = ["Garry <tahinjanaharygarry@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.5"
+pydantic-settings = "^2.6.1"
+uvicorn = {extras = ["standard"], version = "^0.32.1"}
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.30.0"
+
+[tool.poe.tasks]
+dev = { shell = "PYTHONPATH=src uvicorn app:app --reload" }
+start = { shell = "PYTHONPATH=src uvicorn app:app --workers 4" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
