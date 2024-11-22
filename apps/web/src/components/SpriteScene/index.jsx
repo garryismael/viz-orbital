@@ -10,16 +10,14 @@ export const SpriteScene = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(90);
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading
+  const [loading, setLoading] = useState(true);
   const mouseStartX = useRef(null);
   const isDragging = useRef(false);
 
   useEffect(() => {
-    // Function to preload images
     const preloadImages = async () => {
       const imageUrls = getImageUrls("/r3", "Image", 40);
 
-      // Preload all the images
       const loadImagePromises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
           const img = new Image();
@@ -32,13 +30,13 @@ export const SpriteScene = () => {
       try {
         await Promise.all(loadImagePromises);
         setImages(imageUrls);
-        setLoading(false); // Set loading to false after all images are loaded
+        setLoading(false);
       } catch (error) {
         console.error("Error loading images", error);
       }
     };
 
-    preloadImages(); // Trigger image preload
+    preloadImages();
 
   }, []);
 
@@ -124,29 +122,24 @@ export const SpriteScene = () => {
 
   useEffect(() => {
     const handleWheel = (event) => {
-      // Check the scroll direction and adjust zoom level
       setZoomLevel((prevZoomLevel) => {
         if (event.deltaY < 0) {
-          // Scrolling up: Zoom in
           return Math.max(prevZoomLevel - 5, 10);
         } else {
-          // Scrolling down: Zoom out
           return Math.min(prevZoomLevel + 5, 100);
         }
       });
     };
   
-    // Add wheel event listener
     window.addEventListener("wheel", handleWheel);
   
     return () => {
-      // Cleanup the event listener
       window.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Display loading message while images are loading
+    return <div>Loading...</div>;
   }
 
   return (

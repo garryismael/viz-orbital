@@ -1,3 +1,5 @@
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+
 export const columns = [
   {
     accessorKey: "id",
@@ -22,5 +24,13 @@ export const columns = [
   {
     accessorKey: "favorite",
     header: "Favoris",
+    cell: ({ getValue }) => {
+      const isFavorite = getValue();
+      return isFavorite ? (
+        <FaHeart className="text-red-500" />
+      ) : (
+        <FaRegHeart className="text-gray-500" />
+      );
+    },
   },
 ];

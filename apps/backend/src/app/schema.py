@@ -7,6 +7,7 @@ class BaseApartment(BaseModel):
     price: int
     floor: int
     favorite: bool
+    available: bool
 
 
 class Apartment(BaseApartment):

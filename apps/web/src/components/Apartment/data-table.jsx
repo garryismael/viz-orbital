@@ -21,9 +21,9 @@ export function DataTable({columns, data}) {
   });
 
   return (
-    <div className="rounded-md border !mt-4 max-h[400px] overflow-y-scroll">
+    <div className="rounded-md border !mt-4">
       <Table>
-        <TableHeader>
+        <TableHeader className="w-full">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -41,7 +41,7 @@ export function DataTable({columns, data}) {
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody className="overflow-y-scroll max-h-[200px]">
+        <TableBody className="overflow-y-scroll w-full max-h-[200px]">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow

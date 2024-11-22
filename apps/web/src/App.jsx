@@ -38,20 +38,20 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen relative">
+    <div className="relative h-screen">
       <Dialog className="h-screen">
         <DialogTrigger asChild>
-          <button className="absolute h-20 w-11 flex items-center justify-center z-50 -translate-y-1/2 bg-gray-100 rounded-r-full top-1/2">
+          <button className="absolute z-50 flex items-center justify-center h-20 -translate-y-1/2 bg-gray-100 rounded-r-full w-11 top-1/2">
             <LiaAngleDoubleRightSolid size={24} />
           </button>
         </DialogTrigger>
-        <DialogContent className="left-0 transform-none m-0 top-0 h-screen z-50 overflow-y-hidden max-h-screen">
+        <DialogContent className="top-0 left-0 z-50 h-screen max-h-screen m-0 overflow-hidden transform-none">
           <DialogHeader>
             <DialogTitle>Liste des appartements?</DialogTitle>
             <div className="flex items-center justify-between">
               <h1 className="">25 APPARTEMENTS</h1>
               <button
-                className="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-xl"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-xl"
                 onClick={clear}>
                 <MdRefresh size="24" />
                 RÉINITIALISER
