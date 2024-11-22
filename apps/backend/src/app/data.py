@@ -61,32 +61,5 @@ apartments = [
         "floor": 5,
         "favorite": True,
         "available": True,
-    },
-    {
-        "id": 8,
-        "rooms": 2,
-        "surface": 40,
-        "price": 180000,
-        "floor": 0,
-        "favorite": False,
-        "available": True,
-    },
-    {
-        "id": 9,
-        "rooms": 1,
-        "surface": 30,
-        "price": 120000,
-        "floor": 0,
-        "favorite": False,
-        "available": False,
-    },
-    {
-        "id": 10,
-        "rooms": 3,
-        "surface": 65,
-        "price": 350000,
-        "floor": 3,
-        "favorite": True,
-        "available": True,
-    },
+    }
 ]
