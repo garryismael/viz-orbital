@@ -9,9 +9,38 @@ import { ZoomCamera } from "../CameraZoom";
 export const SpriteScene = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(90);
-  const images = getImageUrls("/r3", "Image", 40);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true); // State to track loading
   const mouseStartX = useRef(null);
   const isDragging = useRef(false);
+
+  useEffect(() => {
+    // Function to preload images
+    const preloadImages = async () => {
+      const imageUrls = getImageUrls("/r3", "Image", 40);
+
+      // Preload all the images
+      const loadImagePromises = imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = () => resolve(url);
+          img.onerror = (err) => reject(err);
+        });
+      });
+
+      try {
+        await Promise.all(loadImagePromises);
+        setImages(imageUrls);
+        setLoading(false); // Set loading to false after all images are loaded
+      } catch (error) {
+        console.error("Error loading images", error);
+      }
+    };
+
+    preloadImages(); // Trigger image preload
+
+  }, []);
 
   const handlePrev = () => {
     setImageIndex((prevIndex) =>
@@ -116,16 +145,21 @@ export const SpriteScene = () => {
     };
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>; // Display loading message while images are loading
+  }
+
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
-      <Canvas  style={{ width: "100%", height: "100%" }}>
+      <Canvas style={{ width: "100%", height: "100%" }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <ZoomCamera zoomLevel={zoomLevel} />
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1, 0]}
-          visible={false}>
+          visible={false}
+        >
           <planeGeometry args={[10, 10]} />
           <meshStandardMaterial color="lightblue" />
         </mesh>
